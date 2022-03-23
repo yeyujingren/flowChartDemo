@@ -14,5 +14,8 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-  ]
+  ],
+  server: {
+    host: '0.0.0.0'
+  }
 })

@@ -3,20 +3,7 @@
     <div v-if="!created">
       <div class="message intro">
         <div class="note">
-          Drop BPMN diagram from your desktop or
-          <a @click="createNewDiagram" href>create a new diagram</a> to get
-          started.
-        </div>
-      </div>
-
-      <div v-if="error" class="message error">
-        <div class="note">
-          <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
-
-          <div class="details">
-            <span>Import Error Details</span>
-            <pre></pre>
-          </div>
+          <a @click="createNewDiagram" href>点击创建一个新的流程图</a>
         </div>
       </div>
     </div>
@@ -29,12 +16,11 @@
       class="properties-panel-parent"
       ref="panelParent"
     ></div> -->
-    <button @click="downloadXml">下载</button>
+    <!-- <button v-show="created" @click="downloadXml">下载</button> -->
   </div>
 </template>
 
 <script lang="ts">
-// import BpmnJS from "bpmn-js/dist/bpmn-navigated-viewer.production.min.js";
 import { debounce } from 'min-dash';
 import BpmnModeler from "bpmn-js/lib/Modeler";
 // import {
@@ -53,44 +39,20 @@ import {
 import { removeClassName, addClassName, registerFileDrop } from "../utils";
 import newDiagram from "../assets/newDiagram.bpmn?raw";
 import { RemoveEle, SelectStack } from './type';
+import { ElMessage } from 'element-plus';
 
 export default defineComponent({
   name: "vue-bpmn",
-  props: {
-    // url: {
-    //   type: String,
-    //   required: true,
-    // },
-    // options: {
-    //   type: Object,
-    // },
-  },
+  props: {},
   emits: ['selectChange', 'remove:shape', 'remove:connection', 'remove:root'],
   setup(props, { emit }) {
     const state = reactive({
-      error: false,
       created: false,
     });
     let diagramXML = ref("");
     const container = ref<HTMLDivElement>();
     const canvas = ref<HTMLDivElement>();
-    // const panelParent = ref<HTMLDivElement>();
-
-    let bpmnViewer: any;
     let bpmnModeler: any;
-
-    // function fetchDiagram(url: string) {
-    //   fetch(url)
-    //     .then(function (response) {
-    //       return response.text();
-    //     })
-    //     .then(function (text) {
-    //       diagramXML.value = text;
-    //     })
-    //     .catch(function (err) {
-    //       emit("error", err);
-    //     });
-    // }
 
     function createNewDiagram(e: Event) {
       e.stopPropagation();
@@ -109,7 +71,8 @@ export default defineComponent({
         removeClassName(container.value!, "with-diagram");
         addClassName(container.value!, '"with-error');
         state.created = false;
-        console.error(err);
+
+        ElMessage.error('加载模板数据异常，请刷新重试');
       }
     }
 
@@ -132,26 +95,6 @@ export default defineComponent({
     }, 500);
 
     onMounted(() => {
-      // const _options = Object.assign(
-      //   {
-      //     container: container.value,
-      //   },
-      //   props.options
-      // );
-      // bpmnViewer = new BpmnJS(_options);
-      // bpmnViewer?.on("import.done", function (event: any) {
-      //   var error = event.error;
-      //   var warnings = event.warnings;
-      //   if (error) {
-      //     emit("error", error);
-
-      //     emit;
-      //   } else {
-      //     emit("shown", warnings);
-      //   }
-      //   bpmnViewer.get("canvas").zoom("fit-viewport");
-      // });
-
       bpmnModeler = new BpmnModeler({
         container: canvas.value,
         // propertiesPanel: {
@@ -186,31 +129,10 @@ export default defineComponent({
       removeClassName(container.value!, "with-diagram");
 
       registerFileDrop(container.value!, openDiagram);
-
-      // if (props.url) {
-      //   fetchDiagram(props.url);
-      // }
     });
-
-    // onUnmounted(() => {
-    //   bpmnViewer.destory();
-    // });
-
-    // watch(
-    //   () => props.url,
-    //   (v) => {
-    //     emit("loading");
-    //     fetchDiagram(v);
-    //   }
-    // );
-
-    // watch(diagramXML, (v) => {
-    //   bpmnViewer.importXML(v);
-    // });
 
     return {
       container,
-      // panelParent,
       canvas,
       createNewDiagram,
       downloadXml,

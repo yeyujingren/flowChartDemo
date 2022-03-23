@@ -3,13 +3,13 @@
     @selectChange="selectionChangeHandler"
     @remove:shape="removeHandler"
   >
-    <form-a :ruleForm="ruleForm" />
+    <form-a v-if="selectionActivie" :ruleForm="ruleForm" />
   </vue-bpmn>
 </template>
 
 <script lang="ts">
 import VueBpmn from "./bpmn.vue";
-import { computed, defineComponent, reactive, ref, toRefs } from "vue";
+import { computed, defineComponent, nextTick, reactive, ref, toRefs } from "vue";
 import { RemoveEle, SelectStack } from "./type";
 import formA from "./forms/a.vue";
 
@@ -54,52 +54,37 @@ export default defineComponent({
 
     const selectionActivie = ref('');
 
-    function handleError(err: Error) {
-      console.error("failed to show diagram", err);
-    }
-    function handleShown() {
-      console.log("diagram shown");
-    }
-    function handleLoading() {
-      console.log("diagram loading");
-    }
-
     function selectionChangeHandler({
       newSelection,
-      oldSelection,
     }: SelectStack) {
       const id = newSelection[0]!.id;
-      selectionActivie.value = id;
       const target = state.ruleForms.get(id);
       if (!target) {
         state.ruleForms.set(id, formDataFactory())
       }
+      nextTick(() => {
+        selectionActivie.value = id;
+      })
     }
 
     function removeHandler(removeEle: RemoveEle) {
-      console.log(removeEle.element.id);
+      const id = removeEle.element.id;
+      state.ruleForms.delete(id);
     }
 
     const ruleForm = computed(
       () => {
         const id = selectionActivie.value;
-        let target = state.ruleForms.get(id);
-        if (!target) {
-          target = formDataFactory();
-          state.ruleForms.set(id, target)
-        }
-        return target
+        return state.ruleForms.get(id);
       }
     )
 
     return {
       ...toRefs(state),
-      handleError,
-      handleShown,
-      handleLoading,
       selectionChangeHandler,
       removeHandler,
-      ruleForm
+      ruleForm,
+      selectionActivie
     };
   },
 });
