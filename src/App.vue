@@ -7,6 +7,7 @@ import Flow from './components/flow.vue';
 </template>
 
 <style>
+@import url(./font/iconfont.css);
 html, body {
   height: 100%;
   margin: 0;

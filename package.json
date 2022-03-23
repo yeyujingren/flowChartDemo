@@ -12,9 +12,11 @@
     "@element-plus/icons-vue": "^1.1.4",
     "bpmn-js": "^9.0.3",
     "bpmn-js-properties-panel": "^1.0.0-alpha.5",
+    "diagram-js": "^8.2.0",
     "element-plus": "^2.1.4",
     "less": "^4.1.2",
     "min-dash": "^3.8.1",
+    "tiny-svg": "^2.2.3",
     "vue": "^3.2.25"
   },
   "devDependencies": {
