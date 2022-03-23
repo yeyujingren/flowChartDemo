@@ -23,10 +23,7 @@
 <script lang="ts">
 import { debounce } from 'min-dash';
 import BpmnModeler from "bpmn-js/lib/Modeler";
-// import {
-//   BpmnPropertiesPanelModule,
-//   BpmnPropertiesProviderModule,
-// } from "bpmn-js-properties-panel";
+import customModule from '../custom-bpmn';
 import {
   defineComponent,
   onMounted,
@@ -35,7 +32,6 @@ import {
   toRefs,
 } from "vue";
 import { removeClassName, addClassName, registerFileDrop } from "../utils";
-import { customTranslateModule } from '../utils/translate';
 import newDiagram from "../assets/newDiagram.bpmn?raw";
 
 import { RemoveEle, SelectStack } from './type';
@@ -97,15 +93,11 @@ export default defineComponent({
     onMounted(() => {
       bpmnModeler = new BpmnModeler({
         container: canvas.value,
-        // propertiesPanel: {
-        //   parent: panelParent.value,
-        // },
         additionalModules: [
-          // BpmnPropertiesPanelModule,
-          // BpmnPropertiesProviderModule,
-          customTranslateModule
+          customModule.default
         ],
       });
+      console.log(bpmnModeler)
       bpmnModeler.on("selection.changed", (selectStack: SelectStack) => {
         // filter useless event
         if (selectStack.newSelection.length !== 0)  {

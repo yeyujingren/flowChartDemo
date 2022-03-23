@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import VueBpmn from "./bpmn.vue";
+import VueBpmn from "./vue3-bpmn.vue";
 import { computed, defineComponent, nextTick, reactive, ref, toRefs } from "vue";
 import { RemoveEle, SelectStack } from "./type";
 import formA from "./forms/a.vue";

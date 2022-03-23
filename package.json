@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@bpmn-io/properties-panel": "^0.12.0",
+    "@element-plus/icons-vue": "^1.1.4",
     "bpmn-js": "^9.0.3",
     "bpmn-js-properties-panel": "^1.0.0-alpha.5",
     "element-plus": "^2.1.4",

@@ -1,4 +1,4 @@
-export default {
+const customTranslate = {
 
   // Labels
   'Activate the global connect tool' : '激活全局连接工具',
@@ -207,3 +207,6 @@ export default {
 'Variables':'变量',
 
 };
+
+export default customTranslate;
+export type Translate =  typeof customTranslate;
