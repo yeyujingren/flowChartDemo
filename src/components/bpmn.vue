@@ -30,14 +30,14 @@ import BpmnModeler from "bpmn-js/lib/Modeler";
 import {
   defineComponent,
   onMounted,
-  onUnmounted,
   reactive,
   ref,
   toRefs,
-  watch,
 } from "vue";
 import { removeClassName, addClassName, registerFileDrop } from "../utils";
+import { customTranslateModule } from '../utils/translate';
 import newDiagram from "../assets/newDiagram.bpmn?raw";
+
 import { RemoveEle, SelectStack } from './type';
 import { ElMessage } from 'element-plus';
 
@@ -100,10 +100,11 @@ export default defineComponent({
         // propertiesPanel: {
         //   parent: panelParent.value,
         // },
-        // additionalModules: [
-        //   BpmnPropertiesPanelModule,
-        //   BpmnPropertiesProviderModule,
-        // ],
+        additionalModules: [
+          // BpmnPropertiesPanelModule,
+          // BpmnPropertiesProviderModule,
+          customTranslateModule
+        ],
       });
       bpmnModeler.on("selection.changed", (selectStack: SelectStack) => {
         // filter useless event
@@ -144,16 +145,23 @@ export default defineComponent({
 
 <style lang="less">
 .vue-bpmn-diagram-container {
-  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100%;
   width: 100%;
   display: flex;
   .canvas {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
     flex: 1;
   }
   .properties-panel-parent {
-    min-width: 500px;
+    box-sizing: border-box;
+    max-width: 500px;
+    height: 100%;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
   }
 }
 </style>

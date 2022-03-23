@@ -167,3 +167,8 @@ export default defineComponent({
 });
 </script>
 
+<style lang="less" scoped>
+.demo-ruleForm {
+  
+}
+</style>
