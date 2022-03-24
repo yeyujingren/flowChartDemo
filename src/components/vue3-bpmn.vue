@@ -22,8 +22,7 @@
 
 <script lang="ts">
 import { debounce } from 'min-dash';
-import BpmnModeler from "bpmn-js/lib/Modeler";
-import customModule from '../custom-bpmn';
+import CustomModeler from '../custom-bpmn';
 import {
   defineComponent,
   onMounted,
@@ -89,13 +88,12 @@ export default defineComponent({
         diagramXML.value = '';
       }
     }, 500);
-
     onMounted(() => {
-      bpmnModeler = new BpmnModeler({
+      bpmnModeler = new CustomModeler({
         container: canvas.value,
-        additionalModules: [
-          customModule.default
-        ],
+        // additionalModules: [
+        //   CustomModel
+        // ],
       });
       console.log(bpmnModeler)
       bpmnModeler.on("selection.changed", (selectStack: SelectStack) => {
