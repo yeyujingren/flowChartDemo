@@ -27,7 +27,7 @@ export default class CustomRenderer extends BaseRenderer {
       svgAppend(parentNode, customIcon as SVGElement);
       return customIcon;
     }
-    debugger
+    // debugger
     const shape = this.bpmnRenderer.drawShape(parentNode, element);
     return shape;
   }

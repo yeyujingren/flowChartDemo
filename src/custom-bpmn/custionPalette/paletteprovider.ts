@@ -9,7 +9,7 @@ import {
 export default function PaletteProvider(this: any, 
     palette: { registerProvider: (arg0: any) => void; }, create: any, elementFactory: any,
     spaceTool: any, lassoTool: any, handTool: any,
-    globalConnect: any, translate: any) {
+    globalConnect: any, translate: any, bpmnFactory: any) {
 
   this._palette = palette;
   this._create = create;
@@ -18,7 +18,8 @@ export default function PaletteProvider(this: any,
   this._lassoTool = lassoTool;
   this._handTool = handTool;
   this._globalConnect = globalConnect;
-  this._translate = translate;
+  this._translate = translate,
+  this._bpmnFactory = bpmnFactory;
 
   palette.registerProvider(this);
 }
@@ -31,7 +32,8 @@ PaletteProvider.$inject = [
   'lassoTool',
   'handTool',
   'globalConnect',
-  'translate'
+  'translate',
+  'bpmnFactory'
 ];
 
 
@@ -44,11 +46,15 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       lassoTool = this._lassoTool,
       handTool = this._handTool,
       globalConnect = this._globalConnect,
-      translate = this._translate;
+      translate = this._translate,
+      bpmnFactory = this._bpmnFactory;
 
   function createAction(type: string, group: string, className: string, title: string, options?: {isExpanded: any}) {
     function createListener(event: Event) {
-      var shape = elementFactory.createShape(assign({ type: type }, options));
+      console.log('bpmnFactory====>', bpmnFactory)
+      const businessObject = bpmnFactory.create(type);
+      businessObject.suitable = 1500;
+      var shape = elementFactory.createShape(assign({ type, businessObject }, options));
 
       if (options) {
         shape.di.isExpanded = options.isExpanded;
@@ -205,7 +211,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
     //   }
     // },
     'create.icon-icon-test1': createAction(
-      'bpmn:Demo', '', 'iconfont icon-musicmenu',
+      'bpmn:StartEvent', '', 'iconfont icon-musicmenu',
       '测试demo'
     ),
     'create.group': createAction(
