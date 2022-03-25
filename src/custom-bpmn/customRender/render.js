@@ -1,6 +1,5 @@
 import { customElements, customConfig } from './util';
 import inherits from 'inherits';
-const HIGH_PRIORITY = 1500;
 
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
 
@@ -8,8 +7,6 @@ import {
   componentsToPath,
   createLine
 } from 'diagram-js/lib/util/RenderUtil';
-
-import musicIcon from './music-menu.svg?raw'
 
 import {
   append as svgAppend,
@@ -165,10 +162,10 @@ CustomRenderer.prototype.drawShape = function (p, element) {
   // 所有节点都会走这个函数，所以此时只限制，需要自定义的才去自定义，否则仍显示bpmn默认图标
   if (customElements.includes(type)) {
     const { url, attr } = customConfig['custom:music'];
-    const customIcon = svgCreate('music', { ...attr, href:  musicIcon});
+    const customIcon = svgCreate('svg', { ...attr, href: url});
     element['width'] = attr.width;
     element['height'] = attr.height;
-    svgAppend(parentNode, customIcon);
+    svgAppend(p, customIcon);
     return customIcon;
   }
   // const shape = this.bpmnRenderer.drawShape(parentNode, element);

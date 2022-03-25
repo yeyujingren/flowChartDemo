@@ -22,6 +22,8 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
       return self.baseCreate(elementType, Object.assign({ type: 'label' }, DEFAULT_LABEL_SIZE, attrs));
     }
 
+    // debugger
+
     // add type to businessObject if custom
     if (/^custom:/.test(type)) {
       if (!attrs.businessObject) {

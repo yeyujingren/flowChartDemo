@@ -159,7 +159,7 @@ PaletteProvider.prototype.getPaletteEntries = function (element) {
       }
     },
     'create.icon-icon-test1': createAction(
-      'custom:musice', 'custom', 'iconfont icon-musicmenu',
+      'custom:music', 'custom', 'iconfont icon-musicmenu',
       '音乐icon'
     ),
     'custom-circle': createAction(
