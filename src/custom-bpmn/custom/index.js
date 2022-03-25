@@ -1,19 +1,29 @@
-// import paletteProvider from "../customPalette/paletteprovider";
 import customTranslate from '../customTranslate/customTranslate';
-// import customPalette from '../custionPalette/palette';
 import paletteProvider from '../custionPalette/paletteprovider'
 import customRenderer from '../customRender/render';
 import CustomElementFactory from '../customElementFactory';
+import CustomRules from '../customRules';
+import CustomOrderingProvider from '../customOrderingProvider';
+import CustomContextPadProvider from '../customContextPadProvider';
+import CustomUpdater from '../customUpdater';
 
 export default {
   __init__: [
-    'translate',
-    'customPalette',
+    // 'translate',
+    'contextPadProvider',
+    'customOrderingProvider',
     'customRenderer',
-    'elementFactory'
+    'customRules',
+    'customUpdater',
+    'elementFactory',
+    'customPalette'
   ],
-  translate: ['value', customTranslate],
-  customPalette: ["type", paletteProvider],
+  // translate: ['value', customTranslate],
+  contextPadProvider: [ 'type', CustomContextPadProvider ],
+  customOrderingProvider: [ 'type', CustomOrderingProvider ],
   customRenderer: ["type", customRenderer],
+  customRules: ['type', CustomRules],
+  customUpdater: [ 'type', CustomUpdater ],
   elementFactory: [ 'type', CustomElementFactory ],
+  customPalette: ["type", paletteProvider],
 }

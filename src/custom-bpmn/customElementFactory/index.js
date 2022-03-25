@@ -1,5 +1,6 @@
 import BpmnElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory';
 import { DEFAULT_LABEL_SIZE } from 'bpmn-js/lib/util/LabelUtil';
+import inherits from 'inherits';
 
 export default function CustomElementFactory(bpmnFactory, moddle) {
   BpmnElementFactory.call(this, bpmnFactory, moddle);
@@ -18,7 +19,7 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
     var type = attrs.type;
 
     if (elementType === 'label') {
-      return self.baseCreate(elementType, assign({ type: 'label' }, DEFAULT_LABEL_SIZE, attrs));
+      return self.baseCreate(elementType, Object.assign({ type: 'label' }, DEFAULT_LABEL_SIZE, attrs));
     }
 
     // add type to businessObject if custom
@@ -29,7 +30,7 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
         };
 
         if (attrs.id) {
-          assign(attrs.businessObject, {
+          Object.assign(attrs.businessObject, {
             id: attrs.id
           });
         }
@@ -37,7 +38,7 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
 
       // add width and height if shape
       if (!/:connection$/.test(type)) {
-        assign(attrs, self._getCustomElementSize(type));
+        Object.assign(attrs, self._getCustomElementSize(type));
       }
 
 
@@ -49,6 +50,12 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
           value: moddle
         });
       }
+
+      // if (!('$descriptor' in attrs.businessObject)) {
+      //   Object.defineProperty(attrs.businessObject, '$descriptor', {
+      //     value: descriptor
+      //   });
+      // }
 
       if (!('$instanceOf' in attrs.businessObject)) {
         // ensures we can use ModelUtil#is for type checks
@@ -83,7 +90,8 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
     return self.createBpmnElement(elementType, attrs);
   };
 }
-CustomElementFactory.prototype = Object.create(BpmnElementFactory.prototype);
+// CustomElementFactory.prototype = Object.create(BpmnElementFactory.prototype);
+inherits(CustomElementFactory, BpmnElementFactory)
 
 CustomElementFactory.$inject = [
   'bpmnFactory',

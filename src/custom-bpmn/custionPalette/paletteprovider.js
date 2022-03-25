@@ -6,20 +6,15 @@ import {
 /**
  * A palette provider for BPMN 2.0 elements.
  */
-export default function PaletteProvider(this: any, 
-    palette: { registerProvider: (arg0: any) => void; }, create: any, elementFactory: any,
-    spaceTool: any, lassoTool: any, handTool: any,
-    globalConnect: any, translate: any, bpmnFactory: any) {
-
-  this._palette = palette;
+export default function PaletteProvider(palette, create, elementFactory,spaceTool, lassoTool, handTool, globalConnect, translate, bpmnFactory) {
   this._create = create;
   this._elementFactory = elementFactory;
   this._spaceTool = spaceTool;
   this._lassoTool = lassoTool;
   this._handTool = handTool;
-  this._globalConnect = globalConnect;
-  this._translate = translate,
-  this._bpmnFactory = bpmnFactory;
+  // this._globalConnect = globalConnect;
+  this._translate = translate;
+  // this._bpmnFactory = bpmnFactory;
 
   palette.registerProvider(this);
 }
@@ -37,27 +32,25 @@ PaletteProvider.$inject = [
 ];
 
 
-PaletteProvider.prototype.getPaletteEntries = function(element: any) {
+PaletteProvider.prototype.getPaletteEntries = function (element) {
 
   var actions = {},
-      create = this._create,
-      elementFactory = this._elementFactory,
-      spaceTool = this._spaceTool,
-      lassoTool = this._lassoTool,
-      handTool = this._handTool,
-      globalConnect = this._globalConnect,
-      translate = this._translate,
-      bpmnFactory = this._bpmnFactory;
+    create = this._create,
+    elementFactory = this._elementFactory,
+    spaceTool = this._spaceTool,
+    lassoTool = this._lassoTool,
+    handTool = this._handTool,
+    // globalConnect = this._globalConnect,
+    translate = this._translate;
+    // bpmnFactory = this._bpmnFactory;
 
-  function createAction(type: string, group: string, className: string, title: string, options?: {isExpanded: any}) {
-    function createListener(event: Event) {
-      console.log('bpmnFactory====>', bpmnFactory)
-      const businessObject = bpmnFactory.create(type);
-      businessObject.suitable = 1500;
-      var shape = elementFactory.createShape(assign({ type, businessObject }, options));
+  function createAction(type, group, className, title, options) {
+
+    function createListener(event) {
+      var shape = elementFactory.createShape(assign({ type: type }, options));
 
       if (options) {
-        shape.di.isExpanded = options.isExpanded;
+        shape.businessObject.di.isExpanded = options.isExpanded;
       }
 
       create.start(event, shape);
@@ -68,7 +61,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
     return {
       group: group,
       className: className,
-      title: title || translate('Create {type}', { type: shortType }),
+      title: translate(title || `Create ${shortType}`),
       action: {
         dragstart: createListener,
         click: createListener
@@ -76,39 +69,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
     };
   }
 
-  function dragEventFactory(type: string) {
-    // debugger
-    return function (event: any) {
-      const taskShape = elementFactory.create('shape', {
-        type: type
-      });
-      create.start(event, taskShape);
-    };
-  }
-
-  function createSubprocess(event: any) {
-    var subProcess = elementFactory.createShape({
-      type: 'bpmn:SubProcess',
-      x: 0,
-      y: 0,
-      isExpanded: true
-    });
-
-    var startEvent = elementFactory.createShape({
-      type: 'bpmn:StartEvent',
-      x: 40,
-      y: 82,
-      parent: subProcess
-    });
-
-    create.start(event, [ subProcess, startEvent ], {
-      hints: {
-        autoSelect: [ subProcess ]
-      }
-    });
-  }
-
-  function createParticipant(event: any) {
+  function createParticipant(event) {
     create.start(event, elementFactory.createParticipantShape());
   }
 
@@ -118,7 +79,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       className: 'bpmn-icon-hand-tool',
       title: translate('Activate the hand tool'),
       action: {
-        click: function(event: any) {
+        click: function (event) {
           handTool.activateHand(event);
         }
       }
@@ -128,7 +89,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       className: 'bpmn-icon-lasso-tool',
       title: translate('Activate the lasso tool'),
       action: {
-        click: function(event: any) {
+        click: function (event) {
           lassoTool.activateSelection(event);
         }
       }
@@ -138,7 +99,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       className: 'bpmn-icon-space-tool',
       title: translate('Activate the create/remove space tool'),
       action: {
-        click: function(event: any) {
+        click: function (event) {
           spaceTool.activateSelection(event);
         }
       }
@@ -148,7 +109,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       className: 'bpmn-icon-connection-multi',
       title: translate('Activate the global connect tool'),
       action: {
-        click: function(event: any) {
+        click: function (event) {
           globalConnect.start(event);
         }
       }
@@ -185,15 +146,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
       'bpmn:DataStoreReference', 'data-store', 'bpmn-icon-data-store',
       translate('Create DataStoreReference')
     ),
-    'create.subprocess-expanded': {
-      group: 'activity',
-      className: 'bpmn-icon-subprocess-expanded',
-      title: translate('Create expanded SubProcess'),
-      action: {
-        dragstart: createSubprocess,
-        click: createSubprocess
-      }
-    },
+    'create.subprocess-expanded':createAction(
+      'bpmn:SubProcess', 'activity', 'bpmn-icon-subprocess-expanded', 'Create expanded SubProcess'
+    ),
     'create.participant-expanded': {
       group: 'collaboration',
       className: 'bpmn-icon-participant',
@@ -203,16 +158,12 @@ PaletteProvider.prototype.getPaletteEntries = function(element: any) {
         click: createParticipant
       }
     },
-    // 'create.icon-icon-test1': {
-    //   className: 'iconfont icon-musicmenu',
-    //   title: '测试demo',
-    //   action: {
-    //     dragstart: dragEventFactory('bpmn:Demo'),
-    //   }
-    // },
     'create.icon-icon-test1': createAction(
-      'bpmn:StartEvent', '', 'iconfont icon-musicmenu',
-      '测试demo'
+      'custom:musice', 'custom', 'iconfont icon-musicmenu',
+      '音乐icon'
+    ),
+    'custom-circle': createAction(
+      'custom:circle', 'custom', 'icon-custom-circle'
     ),
     'create.group': createAction(
       'bpmn:Group', 'artifact', 'bpmn-icon-group',

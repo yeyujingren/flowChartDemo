@@ -95,7 +95,7 @@ export default defineComponent({
         //   CustomModel
         // ],
       });
-      console.log(bpmnModeler)
+      // console.log(bpmnModeler)
       bpmnModeler.on("selection.changed", (selectStack: SelectStack) => {
         // filter useless event
         if (selectStack.newSelection.length !== 0)  {
