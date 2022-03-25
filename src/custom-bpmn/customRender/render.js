@@ -14,8 +14,7 @@ import {
   create as svgCreate
 } from 'tiny-svg';
 
-var COLOR_GREEN = '#52B415',
-  COLOR_RED = '#cc0000',
+var COLOR_RED = '#cc0000',
   COLOR_YELLOW = '#ffc800';
 
 /**
@@ -162,7 +161,7 @@ CustomRenderer.prototype.drawShape = function (p, element) {
   // 所有节点都会走这个函数，所以此时只限制，需要自定义的才去自定义，否则仍显示bpmn默认图标
   if (customElements.includes(type)) {
     const { url, attr } = customConfig['custom:music'];
-    const customIcon = svgCreate('svg', { ...attr, href: url});
+    const customIcon = svgCreate('image', { ...attr, href: url});
     element['width'] = attr.width;
     element['height'] = attr.height;
     svgAppend(p, customIcon);
