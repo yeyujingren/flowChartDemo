@@ -6,13 +6,9 @@ import {
 /**
  * 创建自定义元素
  */
-export default function PaletteProvider(palette, create, elementFactory,spaceTool, lassoTool, handTool, globalConnect, translate, bpmnFactory) {
+export default function PaletteProvider(palette, create, elementFactory, translate) {
   this._create = create;
   this._elementFactory = elementFactory;
-  this._spaceTool = spaceTool;
-  this._lassoTool = lassoTool;
-  this._handTool = handTool;
-  this._globalConnect = globalConnect;
   this._translate = translate;
 
   palette.registerProvider(this);
@@ -22,10 +18,6 @@ PaletteProvider.$inject = [
   'palette',
   'create',
   'elementFactory',
-  'spaceTool',
-  'lassoTool',
-  'handTool',
-  'globalConnect',
   'translate',
 ];
 
@@ -35,10 +27,6 @@ PaletteProvider.prototype.getPaletteEntries = function (element) {
   var actions = {},
     create = this._create,
     elementFactory = this._elementFactory,
-    spaceTool = this._spaceTool,
-    lassoTool = this._lassoTool,
-    handTool = this._handTool,
-    globalConnect = this._globalConnect,
     translate = this._translate;
 
   function createAction(type, group, className, title, options) {

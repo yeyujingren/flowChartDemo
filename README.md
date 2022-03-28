@@ -16,6 +16,9 @@
   - 替换原始图标
 
 ### demo
+<div style="box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%); border-radius: 5px; overflow: hidden;">
+<img src="./doc/demo.png" alt="demn">
+</div>
 
 
 ### how to start

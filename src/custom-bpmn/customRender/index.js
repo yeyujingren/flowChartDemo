@@ -103,6 +103,7 @@ CustomRenderer.$inject = ['eventBus', 'styles'];
  * 返回 true 则会走对应的 drawShape 渲染函数，否则，走原来渲染函数
  */
 CustomRenderer.prototype.canRender = function (element) {
+  console.log(element)
   return /custom:|StartEvent|EndEvent/.test(element.type);
 };
 
@@ -123,16 +124,10 @@ CustomRenderer.prototype.drawShape = function (p, element) {
 };
 
 CustomRenderer.prototype.getShapePath = function (shape) {
-  // debugger;
-  var type = shape.type;
-
-  // if (type === 'custom:music') {
-  //   return musicIcon;
+  // var type = shape.type;
+  // if (type === 'custom:circle') {
+  //   return this.getCirclePath(shape);
   // }
-
-  if (type === 'custom:circle') {
-    return this.getCirclePath(shape);
-  }
 };
 
 CustomRenderer.prototype.drawConnection = function (p, element) {

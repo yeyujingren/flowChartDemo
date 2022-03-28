@@ -25,7 +25,8 @@ export default function CustomContextPadProvider(injector, connect, translate) {
       connect.start(event, element, autoActivate);
     }
 
-    if (isAny(businessObject, [ 'custom:music', 'custom:circle'])) {
+    // 添加连线
+    if (isAny(businessObject, ['bpmn:StartEvent', 'bpmn:EndEvent', 'custom:task', 'custom:coupon', 'custom:test', 'custom:tips', 'custom:branch'])) {
       assign(actions, {
         'connect': {
           group: 'connect',

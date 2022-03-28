@@ -55,17 +55,19 @@ CustomRules.prototype.init = function() {
 
     // allow connection between custom shape and task
     if (isCustom(source)) {
-      if (is(target, 'bpmn:Task')) {
-        return { type: 'custom:connection' };
-      } else {
-        return false;
-      }
+      // if (is(target, 'custom:coupon')) {
+      //   return { type: 'custom:connection' };
+      // } else {
+      //   return false;
+      // }
+      return { type: 'custom:connection' };
     } else if (isCustom(target)) {
-      if (is(source, 'bpmn:Task')) {
-        return { type: 'custom:connection' };
-      } else {
-        return false;
-      }
+      return { type: 'custom:connection' };
+      // if (is(source, 'custom:coupon')) {
+      //   return { type: 'custom:connection' };
+      // } else {
+      //   return false;
+      // }
     }
   }
 
