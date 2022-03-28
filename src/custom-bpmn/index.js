@@ -8,7 +8,6 @@ function isCustomConnection(element) {
 
 export default function CustomModeler(options) {
   Modeler.call(this, options);
-
   this._customElements = [];
 }
 
@@ -21,7 +20,7 @@ CustomModeler.prototype._modules = [].concat(
   [
     CustomModule
   ]
-);
+)
 
 /**
  * Add a single custom element to the underlying diagram

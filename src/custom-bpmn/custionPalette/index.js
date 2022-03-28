@@ -31,7 +31,7 @@ PaletteProvider.$inject = [
 
 
 PaletteProvider.prototype.getPaletteEntries = function (element) {
-
+  // debugger;
   var actions = {},
     create = this._create,
     elementFactory = this._elementFactory,
@@ -71,101 +71,117 @@ PaletteProvider.prototype.getPaletteEntries = function (element) {
   }
 
   assign(actions, {
-    'hand-tool': {
-      group: 'tools',
-      className: 'bpmn-icon-hand-tool',
-      title: translate('Activate the hand tool'),
-      action: {
-        click: function (event) {
-          handTool.activateHand(event);
-        }
-      }
-    },
-    'lasso-tool': {
-      group: 'tools',
-      className: 'bpmn-icon-lasso-tool',
-      title: translate('Activate the lasso tool'),
-      action: {
-        click: function (event) {
-          lassoTool.activateSelection(event);
-        }
-      }
-    },
-    'space-tool': {
-      group: 'tools',
-      className: 'bpmn-icon-space-tool',
-      title: translate('Activate the create/remove space tool'),
-      action: {
-        click: function (event) {
-          spaceTool.activateSelection(event);
-        }
-      }
-    },
-    'global-connect-tool': {
-      group: 'tools',
-      className: 'bpmn-icon-connection-multi',
-      title: translate('Activate the global connect tool'),
-      action: {
-        click: function (event) {
-          globalConnect.start(event);
-        }
-      }
-    },
-    'tool-separator': {
-      group: 'tools',
-      separator: true
-    },
+    // 'hand-tool': {
+    //   group: 'tools',
+    //   className: 'bpmn-icon-hand-tool',
+    //   title: translate('Activate the hand tool'),
+    //   action: {
+    //     click: function (event) {
+    //       handTool.activateHand(event);
+    //     }
+    //   }
+    // },
+    // 'lasso-tool': {
+    //   group: 'tools',
+    //   className: 'bpmn-icon-lasso-tool',
+    //   title: translate('Activate the lasso tool'),
+    //   action: {
+    //     click: function (event) {
+    //       lassoTool.activateSelection(event);
+    //     }
+    //   }
+    // },
+    // 'space-tool': {
+    //   group: 'tools',
+    //   className: 'bpmn-icon-space-tool',
+    //   title: translate('Activate the create/remove space tool'),
+    //   action: {
+    //     click: function (event) {
+    //       spaceTool.activateSelection(event);
+    //     }
+    //   }
+    // },
+    // 'global-connect-tool': {
+    //   group: 'tools',
+    //   className: 'bpmn-icon-connection-multi',
+    //   title: translate('Activate the global connect tool'),
+    //   action: {
+    //     click: function (event) {
+    //       globalConnect.start(event);
+    //     }
+    //   }
+    // },
+    // 'tool-separator': {
+    //   group: 'tools',
+    //   separator: true
+    // },
     'create.start-event': createAction(
-      'bpmn:StartEvent', 'event', 'bpmn-icon-start-event-none',
+      'bpmn:StartEvent', 'event', 'custom icon-custom-start',
       translate('Create StartEvent')
     ),
-    'create.intermediate-event': createAction(
-      'bpmn:IntermediateThrowEvent', 'event', 'bpmn-icon-intermediate-event-none',
-      translate('Create Intermediate/Boundary Event')
-    ),
+    // 'create.intermediate-event': createAction(
+    //   'bpmn:IntermediateThrowEvent', 'event', 'bpmn-icon-intermediate-event-none',
+    //   translate('Create Intermediate/Boundary Event')
+    // ),
     'create.end-event': createAction(
-      'bpmn:EndEvent', 'event', 'bpmn-icon-end-event-none',
+      'bpmn:EndEvent', 'event', 'custom icon-custom-end',
       translate('Create EndEvent')
     ),
-    'create.exclusive-gateway': createAction(
-      'bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none',
-      translate('Create Gateway')
-    ),
-    'create.task': createAction(
-      'bpmn:Task', 'activity', 'bpmn-icon-task',
-      translate('Create Task')
-    ),
-    'create.data-object': createAction(
-      'bpmn:DataObjectReference', 'data-object', 'bpmn-icon-data-object',
-      translate('Create DataObjectReference')
-    ),
-    'create.data-store': createAction(
-      'bpmn:DataStoreReference', 'data-store', 'bpmn-icon-data-store',
-      translate('Create DataStoreReference')
-    ),
-    'create.subprocess-expanded':createAction(
-      'bpmn:SubProcess', 'activity', 'bpmn-icon-subprocess-expanded', 'Create expanded SubProcess'
-    ),
-    'create.participant-expanded': {
-      group: 'collaboration',
-      className: 'bpmn-icon-participant',
-      title: translate('Create Pool/Participant'),
-      action: {
-        dragstart: createParticipant,
-        click: createParticipant
-      }
-    },
-    'create.icon-icon-test1': createAction(
-      'custom:music', 'custom', 'iconfont icon-musicmenu',
+    // 'create.exclusive-gateway': createAction(
+    //   'bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-none',
+    //   translate('Create Gateway')
+    // ),
+    // 'create.task': createAction(
+    //   'bpmn:Task', 'activity', 'bpmn-icon-task',
+    //   translate('Create Task')
+    // ),
+    // 'create.data-object': createAction(
+    //   'bpmn:DataObjectReference', 'data-object', 'bpmn-icon-data-object',
+    //   translate('Create DataObjectReference')
+    // ),
+    // 'create.data-store': createAction(
+    //   'bpmn:DataStoreReference', 'data-store', 'bpmn-icon-data-store',
+    //   translate('Create DataStoreReference')
+    // ),
+    // 'create.subprocess-expanded':createAction(
+    //   'bpmn:SubProcess', 'activity', 'bpmn-icon-subprocess-expanded', 'Create expanded SubProcess'
+    // ),
+    // 'create.participant-expanded': {
+    //   group: 'collaboration',
+    //   className: 'bpmn-icon-participant',
+    //   title: translate('Create Pool/Participant'),
+    //   action: {
+    //     dragstart: createParticipant,
+    //     click: createParticipant
+    //   }
+    // },
+    'create.custom-task': createAction(
+      'custom:task', 'custom', 'custom icon-custom-task',
       '音乐icon'
     ),
-    'custom-circle': createAction(
-      'custom:circle', 'custom', 'icon-custom-circle'
+    'create.custom-coupon': createAction(
+      'custom:coupon', 'custom', 'custom icon-custom-coupon',
+      '音乐icon'
     ),
-    'create.group': createAction(
-      'bpmn:Group', 'artifact', 'bpmn-icon-group',
-      translate('Create Group')
+    'create.custom-test': createAction(
+      'custom:test', 'custom', 'custom icon-custom-test',
+      '音乐icon'
     ),
+    'create.custom-tips': createAction(
+      'custom:tips', 'custom', 'custom icon-custom-tips',
+      '音乐icon'
+    ),
+    'create.custom-branch': createAction(
+      'custom:branch', 'custom', 'custom icon-custom-branch',
+      '音乐icon'
+    ),
+    // 'custom-circle': createAction(
+    //   'custom:circle', 'custom', 'icon-custom-circle'
+    // ),
+    // 'create.group': createAction(
+    //   'bpmn:Group', 'artifact', 'bpmn-icon-group',
+    //   translate('Create Group')
+    // ),
   });
 
   return actions;
