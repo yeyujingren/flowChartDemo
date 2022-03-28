@@ -10,7 +10,7 @@ import {
   bind
 } from 'min-dash';
 
-
+// 允许 custom elements 连接到 BPMN element
 export default function CustomContextPadProvider(injector, connect, translate) {
 
   injector.invoke(ContextPadProvider, this);

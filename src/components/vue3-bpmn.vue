@@ -11,12 +11,6 @@
     <div v-show="created" class="properties-panel-parent">
       <slot/>
     </div>
-    <!-- <div
-      v-show="created"
-      class="properties-panel-parent"
-      ref="panelParent"
-    ></div> -->
-    <!-- <button v-show="created" @click="downloadXml">下载</button> -->
   </div>
 </template>
 

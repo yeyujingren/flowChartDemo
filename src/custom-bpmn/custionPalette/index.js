@@ -4,7 +4,7 @@ import {
 
 
 /**
- * A palette provider for BPMN 2.0 elements.
+ * 创建自定义元素
  */
 export default function PaletteProvider(palette, create, elementFactory,spaceTool, lassoTool, handTool, globalConnect, translate, bpmnFactory) {
   this._create = create;
@@ -12,9 +12,8 @@ export default function PaletteProvider(palette, create, elementFactory,spaceToo
   this._spaceTool = spaceTool;
   this._lassoTool = lassoTool;
   this._handTool = handTool;
-  // this._globalConnect = globalConnect;
+  this._globalConnect = globalConnect;
   this._translate = translate;
-  // this._bpmnFactory = bpmnFactory;
 
   palette.registerProvider(this);
 }
@@ -28,7 +27,6 @@ PaletteProvider.$inject = [
   'handTool',
   'globalConnect',
   'translate',
-  'bpmnFactory'
 ];
 
 
@@ -40,9 +38,8 @@ PaletteProvider.prototype.getPaletteEntries = function (element) {
     spaceTool = this._spaceTool,
     lassoTool = this._lassoTool,
     handTool = this._handTool,
-    // globalConnect = this._globalConnect,
+    globalConnect = this._globalConnect,
     translate = this._translate;
-    // bpmnFactory = this._bpmnFactory;
 
   function createAction(type, group, className, title, options) {
 

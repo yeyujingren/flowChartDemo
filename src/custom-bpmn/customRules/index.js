@@ -18,7 +18,7 @@ function isCustom(element) {
 }
 
 /**
- * Specific rules for custom elements
+ * 定义自定义元素的规则，包括是否可以连线，后面可以接入什么元素
  */
 export default function CustomRules(eventBus) {
   RuleProvider.call(this, eventBus);

@@ -14,8 +14,7 @@ import {
 
 
 /**
- * A handler responsible for updating the custom element's businessObject
- * once changes on the diagram happen.
+ * 页面数据变更时更新业务数据
  */
 export default function CustomUpdater(eventBus, modeling, bpmnjs) {
 
