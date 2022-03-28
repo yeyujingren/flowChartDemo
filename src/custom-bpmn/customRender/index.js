@@ -26,48 +26,6 @@ export default function CustomRenderer(eventBus, styles) {
 
   var computeStyle = styles.computeStyle;
 
-  // this.drawTriangle = function (p, side) {
-  //   var halfSide = side / 2,
-  //     points,
-  //     attrs;
-
-  //   points = [halfSide, 0, side, side, 0, side];
-
-  //   attrs = computeStyle(attrs, {
-  //     stroke: COLOR_GREEN,
-  //     strokeWidth: 2,
-  //     fill: COLOR_GREEN
-  //   });
-
-  //   var polygon = svgCreate('polygon');
-
-  //   svgAttr(polygon, {
-  //     points: points
-  //   });
-
-  //   svgAttr(polygon, attrs);
-
-  //   svgAppend(p, polygon);
-
-  //   return polygon;
-  // };
-
-  // this.getTrianglePath = function (element) {
-  //   var x = element.x,
-  //     y = element.y,
-  //     width = element.width,
-  //     height = element.height;
-
-  //   var trianglePath = [
-  //     ['M', x + width / 2, y],
-  //     ['l', width / 2, height],
-  //     ['l', -width, 0],
-  //     ['z']
-  //   ];
-
-  //   return componentsToPath(trianglePath);
-  // };
-
   this.drawCircle = function (p, width, height) {
     var cx = width / 2,
       cy = height / 2;

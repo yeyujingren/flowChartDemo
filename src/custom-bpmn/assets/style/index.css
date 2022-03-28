@@ -1,0 +1,31 @@
+.custom {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.icon-custom-start {
+  background-image: url('../images/开始游戏.png');
+}
+
+.icon-custom-end {
+  background-image: url('../images/结束.png');
+}
+
+.icon-custom-task {
+  background-image: url('../images/任务.png');
+}
+
+.icon-custom-coupon {
+  background-image: url('../images/优惠券.png');
+}
+
+.icon-custom-test {
+  background-image: url('../images/实验.png');
+}
+
+.icon-custom-tips {
+  background-image: url('../images/提示.png');
+}
+
+.icon-custom-branch {
+  background-image: url('../images/分支模板.png');
+}
