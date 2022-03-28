@@ -25,3 +25,9 @@
 - `git clone https://github.com/yeyujingren/flowChartDemo.git`
 - `npm -i` || `yarn install`
 - `npm run dev` || `yarn dev`
+
+注：
+上述自定义图片均来自：[iconfont](https://www.iconfont.cn/)
+
+如果对您的开发有所帮助，请给我一个🌟
+😄
