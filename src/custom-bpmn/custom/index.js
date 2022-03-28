@@ -15,7 +15,7 @@ import CustomUpdater from '../customUpdater';
  */
 export default {
   __init__: [
-    // 'translate',
+    'translate',
     'contextPadProvider',
     'customOrderingProvider',
     'customRenderer',
@@ -24,7 +24,7 @@ export default {
     'elementFactory',
     'paletteProvider' // 覆盖原始流程图标
   ],
-  // translate: ['value', customTranslate],
+  translate: ['value', customTranslate],
   contextPadProvider: [ 'type', CustomContextPadProvider ],
   customOrderingProvider: [ 'type', CustomOrderingProvider ],
   customRenderer: ["type", customRenderer],

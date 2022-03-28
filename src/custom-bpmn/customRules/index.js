@@ -6,8 +6,6 @@ import {
   is
 } from 'bpmn-js/lib/util/ModelUtil';
 
-import inherits from 'inherits';
-
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 
 var HIGH_PRIORITY = 1500;
@@ -24,8 +22,7 @@ export default function CustomRules(eventBus) {
   RuleProvider.call(this, eventBus);
 }
 
-// CustomRules.prototype = Object.create(RuleProvider.prototype);
-inherits(CustomRules, RuleProvider)
+CustomRules.prototype = Object.create(RuleProvider.prototype);
 
 CustomRules.$inject = [ 'eventBus' ];
 

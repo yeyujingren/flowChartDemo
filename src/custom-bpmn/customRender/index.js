@@ -1,5 +1,4 @@
 import { customElements, customConfig } from './util';
-import inherits from 'inherits';
 
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
 
@@ -95,38 +94,32 @@ export default function CustomRenderer(eventBus, styles) {
   };
 }
 
-// CustomRenderer.prototype = Object.create(BaseRenderer.prototype);
-inherits(CustomRenderer, BaseRenderer);
+CustomRenderer.prototype = Object.create(BaseRenderer.prototype);
 
 
 CustomRenderer.$inject = ['eventBus', 'styles'];
 
-
+/**
+ * 返回 true 则会走对应的 drawShape 渲染函数，否则，走原来渲染函数
+ */
 CustomRenderer.prototype.canRender = function (element) {
-  return /^custom:/.test(element.type);
+  return /custom:|StartEvent|EndEvent/.test(element.type);
 };
 
 CustomRenderer.prototype.drawShape = function (p, element) {
-  // var type = element.type;
-
-  // if (type === 'custom:triangle') {
-  //   return this.drawTriangle(p, element.width);
-  // }
   const type = element.type; // 获取到类型
-  if (type === 'custom:circle') {
-    return this.drawCircle(p, element.width, element.height);
-  }
   // 所有节点都会走这个函数，所以此时只限制，需要自定义的才去自定义，否则仍显示bpmn默认图标
   if (customElements.includes(type)) {
-    const { url, attr } = customConfig['custom:music'];
+    const { url, attr } = customConfig[type];
     const customIcon = svgCreate('image', { ...attr, href: url});
     element['width'] = attr.width;
     element['height'] = attr.height;
     svgAppend(p, customIcon);
     return customIcon;
   }
-  // const shape = this.bpmnRenderer.drawShape(parentNode, element);
-  // return shape;
+  // 未被自定义覆盖，且通过canRender校验的节点，我们默认按照原来的逻辑渲染
+  const shape = this.bpmnRenderer.drawShape(parentNode, element);
+  return shape;
 };
 
 CustomRenderer.prototype.getShapePath = function (shape) {

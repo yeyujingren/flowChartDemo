@@ -1,5 +1,4 @@
 import ContextPadProvider from 'bpmn-js/lib/features/context-pad/ContextPadProvider';
-import inherits from 'inherits';
 
 import {
   isAny
@@ -44,8 +43,7 @@ export default function CustomContextPadProvider(injector, connect, translate) {
   };
 }
 
-// CustomContextPadProvider.prototype = Object.create(ContextPadProvider.prototype);
-inherits(CustomContextPadProvider, ContextPadProvider);
+CustomContextPadProvider.prototype = Object.create(ContextPadProvider.prototype);
 
 CustomContextPadProvider.$inject = [
   'injector',

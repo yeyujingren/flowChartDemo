@@ -1,6 +1,5 @@
 import BpmnElementFactory from 'bpmn-js/lib/features/modeling/ElementFactory';
 import { DEFAULT_LABEL_SIZE } from 'bpmn-js/lib/util/LabelUtil';
-import inherits from 'inherits';
 
 // 创建 custom 图形
 export default function CustomElementFactory(bpmnFactory, moddle) {
@@ -91,8 +90,7 @@ export default function CustomElementFactory(bpmnFactory, moddle) {
     return self.createBpmnElement(elementType, attrs);
   };
 }
-// CustomElementFactory.prototype = Object.create(BpmnElementFactory.prototype);
-inherits(CustomElementFactory, BpmnElementFactory)
+CustomElementFactory.prototype = Object.create(BpmnElementFactory.prototype);
 
 CustomElementFactory.$inject = [
   'bpmnFactory',

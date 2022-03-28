@@ -1,5 +1,4 @@
 import OrderingProvider from 'diagram-js/lib/features/ordering/OrderingProvider';
-import inherits from 'inherits';
 
 
 /**
@@ -26,5 +25,4 @@ export default function CustomOrderingProvider(eventBus, canvas) {
 
 CustomOrderingProvider.$inject = [ 'eventBus', 'canvas' ];
 
-// CustomOrderingProvider.prototype = Object.create(OrderingProvider.prototype);
-inherits(CustomOrderingProvider, OrderingProvider)
+CustomOrderingProvider.prototype = Object.create(OrderingProvider.prototype);

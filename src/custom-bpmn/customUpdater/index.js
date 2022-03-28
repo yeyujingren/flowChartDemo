@@ -5,8 +5,6 @@ import {
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-import inherits from 'inherits';
-
 import {
   add as collectionAdd,
   remove as collectionRemove
@@ -130,8 +128,7 @@ export default function CustomUpdater(eventBus, modeling, bpmnjs) {
   this.postExecute('canvas.updateRoot', updateCustomElementsRoot);
 }
 
-// CustomUpdater.prototype = Object.create(CommandInterceptor.prototype);
-inherits(CustomUpdater, CommandInterceptor)
+CustomUpdater.prototype = Object.create(CommandInterceptor.prototype);
 
 CustomUpdater.$inject = [ 'eventBus', 'modeling', 'bpmnjs' ];
 
