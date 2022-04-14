@@ -12,6 +12,7 @@ import VueBpmn from "./vue3-bpmn.vue";
 import { computed, defineComponent, nextTick, reactive, ref, toRefs } from "vue";
 import { RemoveEle, SelectStack } from "./type";
 import formA from "./forms/a.vue";
+import { tr } from "element-plus/lib/locale";
 
 interface FormData {
   name: string;
@@ -43,6 +44,13 @@ export default defineComponent({
     formA,
   },
   setup() {
+    let i = 0;
+    while(true) {
+      if (i === 100000) {
+        break;
+      }
+      i ++
+    }
     const state = reactive({
       options: {
         propertiesPanel: {},

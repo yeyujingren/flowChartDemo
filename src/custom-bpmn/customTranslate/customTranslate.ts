@@ -15,7 +15,6 @@ export default function customTranslate(template: Template, replacements: { [x: 
     if (translations[replacements[key] as Template] != null && translations[replacements[key] as Template] != 'undefined') {
       str = translations[replacements[key] as Template];
     }
-    console.log(replacements)
     return str || '{' + key + '}';
 
   });

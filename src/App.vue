@@ -3,7 +3,7 @@ import Flow from './components/flow.vue';
 </script>
 
 <template>
-  <Flow />
+  <Flow/>
 </template>
 
 <style>
@@ -15,5 +15,8 @@ html, body {
 }
 #app {
   height: 100%;
+}
+[v-cloak] {
+  display: none;
 }
 </style>

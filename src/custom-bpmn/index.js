@@ -43,7 +43,6 @@ CustomModeler.prototype._addCustomShape = function (customElement) {
 };
 
 CustomModeler.prototype._addCustomConnection = function (customElement) {
-
   this._customElements.push(customElement);
 
   const canvas = this.get('canvas');
@@ -51,7 +50,6 @@ CustomModeler.prototype._addCustomConnection = function (customElement) {
   const elementRegistry = this.get('elementRegistry');
 
   const customAttrs = Object.assign({ businessObject: customElement }, customElement);
-
   const connection = elementFactory.create(
     'connection', 
     Object.assign(customAttrs, {

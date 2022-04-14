@@ -46,7 +46,10 @@ CustomRules.prototype.init = function() {
   /**
    * Can source and target be connected?
    */
-  function canConnect(source, target) {
+  function canConnect(source, target, connection) {
+    // console.log(source, target, connection)
+    // return{ type: 'bpmn:SequenceFlow' };
+    return;
 
     // only judge about custom elements
     if (!isCustom(source) && !isCustom(target)) {
@@ -114,6 +117,7 @@ CustomRules.prototype.init = function() {
   });
 
   this.addRule('connection.create', HIGH_PRIORITY, function(context) {
+    console.log(11)
     const source = context.source;
     const target = context.target;
 
@@ -121,6 +125,7 @@ CustomRules.prototype.init = function() {
   });
 
   this.addRule('connection.reconnectStart', HIGH_PRIORITY, function(context) {
+    console.log(22)
     const connection = context.connection;
     const source = context.hover || context.source;
     const target = connection.target;
@@ -129,6 +134,7 @@ CustomRules.prototype.init = function() {
   });
 
   this.addRule('connection.reconnectEnd', HIGH_PRIORITY, function(context) {
+    console.log(33)
     const connection = context.connection;
     const source = connection.source;
     const target = context.hover || context.target;

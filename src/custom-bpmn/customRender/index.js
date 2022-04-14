@@ -20,51 +20,12 @@ var COLOR_RED = '#cc0000',
  * A renderer that knows how to render custom elements.
  */
 export default function CustomRenderer(eventBus, styles) {
+  // debugger
 
   BaseRenderer.call(this, eventBus, 2000);
 
   var computeStyle = styles.computeStyle;
 
-  this.drawCircle = function (p, width, height) {
-    var cx = width / 2,
-      cy = height / 2;
-
-    var attrs = computeStyle(attrs, {
-      stroke: COLOR_YELLOW,
-      strokeWidth: 4,
-      fill: COLOR_YELLOW
-    });
-
-    var circle = svgCreate('circle');
-
-    svgAttr(circle, {
-      cx: cx,
-      cy: cy,
-      r: Math.round((width + height) / 4)
-    });
-
-    svgAttr(circle, attrs);
-
-    svgAppend(p, circle);
-
-    return circle;
-  };
-
-  this.getCirclePath = function (shape) {
-    var cx = shape.x + shape.width / 2,
-      cy = shape.y + shape.height / 2,
-      radius = shape.width / 2;
-
-    var circlePath = [
-      ['M', cx, cy],
-      ['m', 0, -radius],
-      ['a', radius, radius, 0, 1, 1, 0, 2 * radius],
-      ['a', radius, radius, 0, 1, 1, 0, -2 * radius],
-      ['z']
-    ];
-
-    return componentsToPath(circlePath);
-  };
 
   this.drawCustomConnection = function (p, element) {
     var attrs = computeStyle(attrs, {
@@ -103,7 +64,6 @@ CustomRenderer.$inject = ['eventBus', 'styles'];
  * 返回 true 则会走对应的 drawShape 渲染函数，否则，走原来渲染函数
  */
 CustomRenderer.prototype.canRender = function (element) {
-  console.log(element)
   return /custom:|StartEvent|EndEvent/.test(element.type);
 };
 
@@ -124,14 +84,11 @@ CustomRenderer.prototype.drawShape = function (p, element) {
 };
 
 CustomRenderer.prototype.getShapePath = function (shape) {
-  // var type = shape.type;
-  // if (type === 'custom:circle') {
-  //   return this.getCirclePath(shape);
-  // }
+  
 };
 
 CustomRenderer.prototype.drawConnection = function (p, element) {
-
+  console.log(44)
   var type = element.type;
 
   if (type === 'custom:connection') {
