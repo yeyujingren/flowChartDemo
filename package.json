@@ -17,7 +17,8 @@
     "less": "^4.1.2",
     "min-dash": "^3.8.1",
     "tiny-svg": "^2.2.3",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue3-eventbus": "^2.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",

@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import Flow from './components/flow.vue';
+import Bus from './utils/eventBus';
+import { inject } from 'vue';
+const eventBus: Bus = inject('$bus')!;
+function click() {
+  eventBus.emit('ButtonSetup');
+}
 </script>
 
 <template>
   <Flow/>
+  <button @click="click">hahahah</button>
 </template>
 
 <style>

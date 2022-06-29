@@ -9,10 +9,10 @@
 
 <script lang="ts">
 import VueBpmn from "./vue3-bpmn.vue";
-import { computed, defineComponent, nextTick, reactive, ref, toRefs } from "vue";
+import { computed, defineComponent, inject, nextTick, reactive, ref, toRefs, watch } from "vue";
 import { RemoveEle, SelectStack } from "./type";
 import formA from "./forms/a.vue";
-import { tr } from "element-plus/lib/locale";
+import Bus from '../utils/eventBus';
 
 interface FormData {
   name: string;
@@ -44,13 +44,10 @@ export default defineComponent({
     formA,
   },
   setup() {
-    let i = 0;
-    while(true) {
-      if (i === 100000) {
-        break;
-      }
-      i ++
-    }
+    const eventBus: Bus = inject('$bus')!;
+    eventBus.on('ButtonSetup', () => {
+      console.log(1111)
+    })
     const state = reactive({
       options: {
         propertiesPanel: {},
